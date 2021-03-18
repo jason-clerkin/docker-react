@@ -1,0 +1,17 @@
+language: generic 
+
+# super user
+sudo: required
+services:
+  - docker 
+
+# before deploy or run tests
+before_install:
+  - docker build -t jasonclerkin/docker-react -f Dockerfile.dev .
+script:
+  - docker run -e CI=true jasonclerkin/docker-react npm run test
+
+  # So anytime that Travis see that we have pushed up a new commit to github
+  # it's going to clone all of our code and use the directions above to 
+  # build our docker image, run some tests and reports on whether our tests
+  # succeed or failed
