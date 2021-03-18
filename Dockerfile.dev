@@ -1,0 +1,20 @@
+FROM node:alpine
+
+WORKDIR "/app"
+
+COPY package.json .
+RUN npm install
+
+# why copy over if gonna point back
+# don't need if point back to volumes
+COPY . .
+# instructor would leave in because
+# making use of docker-compose to solve all
+# this volume mounting stuff, copying source code over etc..
+# but at some point in the future you might not use docker-compose or
+# want to use this file to set up your prod code so would definitely need it to copy
+# over all the cource code.Not strictly necessary for what we are doing right now
+# but it will leave in ther for a reminder or refernce in the future
+
+# can override - e.g docker run [container id] npm run test
+CMD ["npm", "run", "start"] 
