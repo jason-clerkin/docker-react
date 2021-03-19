@@ -1,8 +1,8 @@
 FROM node:alpine
 WORKDIR "/app"
-COPY package.json .
+COPY package.json ./
 RUN npm install
-COPY . .
+COPY . ./
 CMD ["npm", "run", "build"] 
 
 # PREVIOUS BLOCK ALL COMPLETE - FROM TERMINATES SUCCESFUL BLOCK
