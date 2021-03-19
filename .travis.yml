@@ -16,16 +16,16 @@ script:
 
   # AWS beanstalk - load balancer (route to node with least traffic), auto scales
 
-  deploy:
-    provider: elasticbeanstalk
-    region: "eu-west-1"
-    app: "docker-react"
-    env: "Dockerreact-env"
-    # s3 bucket - hard drive running on aws
-    bucket_name: "elasticbeanstalk-eu-west-1-234188078048"
-    # first time wont create "server" (will after 1st deploy) folder, so use app name
-    bucket_path: "docker-react"
-    on:
-      branch: master
-    access_key_id: $AWS_ACCESS_KEY
-    secret_access_key: $AWS_SECRET_KEY
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-west-1"
+  app: "docker-react"
+  env: "Dockerreact-env"
+  # s3 bucket - hard drive running on aws
+  bucket_name: "elasticbeanstalk-eu-west-1-234188078048"
+  # first time wont create "server" (will after 1st deploy) folder, so use app name
+  bucket_path: "docker-react"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
