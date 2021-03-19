@@ -1,7 +1,7 @@
-language: generic 
+language: generic
 
 services:
-  - docker 
+  - docker
 
 # before deploy or run tests
 before_install:
@@ -10,6 +10,23 @@ script:
   - docker run -e CI=true jasonclerkin/docker-react npm run test
 
   # So anytime that Travis see that we have pushed up a new commit to github
-  # it's going to clone all of our code and use the directions above to 
+  # it's going to clone all of our code and use the directions above to
   # build our docker image, run some tests and reports on whether our tests
   # succeed or failed
+
+  # AWS beanstalk - load balancer (route to node with least traffic), auto scales
+
+  deploy:
+    provider: elasticbeanstalk
+    region: "eu-west-1"
+    app: "docker-react"
+    env: "Dockerreact-env"
+    # s3 bucket - hard drive running on aws
+    bucket_name: "elasticbeanstalk-eu-west-1-234188078048"
+    # first time wont create "server" (will after 1st deploy) folder, so use app name
+    bucket_path: "docker-react"
+    on:
+      branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: 
+      secure: $AWS_SECRET_KEY
