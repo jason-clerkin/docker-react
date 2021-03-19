@@ -1,7 +1,5 @@
 language: generic
 
-# super user
-sudo: required
 services:
   - docker
 
